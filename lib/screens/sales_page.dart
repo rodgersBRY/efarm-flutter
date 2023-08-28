@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../utils/app_colors.dart';
+import '../widgets/appbar.dart';
 
 class SalesPage extends StatefulWidget {
   const SalesPage({super.key});
@@ -14,14 +14,7 @@ class _SalesPageState extends State<SalesPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "My Sales",
-            style: TextStyle(color: Colors.white),
-          ),
-          backgroundColor: AppColors.primaryGreenColor,
-          foregroundColor: Colors.white,
-        ),
+        appBar: myAppBar("My Sales"),
       ),
     );
   }

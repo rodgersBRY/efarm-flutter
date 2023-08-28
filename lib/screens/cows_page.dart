@@ -1,8 +1,9 @@
-import 'package:efarm/screens/cow_details_page.dart';
-import 'package:efarm/screens/new_cow_page.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/app_colors.dart';
+import '../widgets/appbar.dart';
+import './cow_details_page.dart';
+import './new_cow_page.dart';
 
 class CowsPage extends StatelessWidget {
   const CowsPage({super.key});
@@ -11,11 +12,7 @@ class CowsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: Text("My Cows"),
-          backgroundColor: AppColors.primaryGreenColor,
-          foregroundColor: Colors.white,
-        ),
+        appBar: myAppBar("My Cows"),
         body: Container(
           child: Column(
             children: [

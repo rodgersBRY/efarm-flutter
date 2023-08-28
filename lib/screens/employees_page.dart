@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../utils/app_colors.dart';
+import '../widgets/appbar.dart';
 
 class EmployeesPage extends StatelessWidget {
   const EmployeesPage({super.key});
@@ -9,13 +9,7 @@ class EmployeesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "My Employees",
-          ),
-          backgroundColor: AppColors.primaryGreenColor,
-          foregroundColor: Colors.white,
-        ),
+        appBar: myAppBar("My Employees"),
       ),
     );
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../utils/app_colors.dart';
+import '../widgets/appbar.dart';
 import '../widgets/icons_grid.dart';
 
 class HomepageScreen extends StatelessWidget {
@@ -11,14 +11,7 @@ class HomepageScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         resizeToAvoidBottomInset: true,
-        appBar: AppBar(
-          title: Text(
-            "Smart Dairy",
-            style: TextStyle(color: Colors.white),
-          ),
-          centerTitle: true,
-          backgroundColor: AppColors.primaryGreenColor,
-        ),
+        appBar: myAppBar("Smart Dairy"),
         body: Padding(
           padding: const EdgeInsets.all(10),
           child: Column(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../utils/app_colors.dart';
+import '../widgets/appbar.dart';
 
 class CowDetailsScreen extends StatelessWidget {
   final String cowName;
@@ -10,11 +10,7 @@ class CowDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: AppBar(
-        title: Text(cowName),
-        backgroundColor: AppColors.primaryGreenColor,
-        foregroundColor: Colors.white,
-      ),
+      appBar: myAppBar(cowName),
     ));
   }
 }

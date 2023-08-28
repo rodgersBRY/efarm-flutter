@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../utils/app_colors.dart';
+import '../widgets/appbar.dart';
 
 class MilkPage extends StatelessWidget {
   const MilkPage({super.key});
@@ -9,13 +9,7 @@ class MilkPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "Milking",
-          ),
-          backgroundColor: AppColors.primaryGreenColor,
-          foregroundColor: Colors.white,
-        ),
+        appBar: myAppBar("Milking"),
       ),
     );
   }

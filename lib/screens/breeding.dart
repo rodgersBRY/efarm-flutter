@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../utils/app_colors.dart';
+import '../widgets/appbar.dart';
 
 class BreedingPage extends StatelessWidget {
   const BreedingPage({super.key});
@@ -9,13 +9,7 @@ class BreedingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "Breeding",
-          ),
-          backgroundColor: AppColors.primaryGreenColor,
-          foregroundColor: Colors.white,
-        ),
+        appBar: myAppBar("Breeding"),
       ),
     );
   }

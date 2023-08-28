@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../utils/app_colors.dart';
+import '../widgets/appbar.dart';
 
 class NewCowPage extends StatefulWidget {
   const NewCowPage({super.key});
@@ -14,30 +14,7 @@ class _NewCowPageState extends State<NewCowPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: Text('Cow Details'),
-          backgroundColor: AppColors.primaryGreenColor,
-          foregroundColor: Colors.white,
-          actions: [
-            IconButton(
-              onPressed: () {
-                
-                Navigator.of(context).pop();
-              },
-              icon: Icon(
-                Icons.cancel_sharp,
-                size: 30,
-              ),
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.check,
-                size: 30,
-              ),
-            ),
-          ],
-        ),
+        appBar: myAppBar("Add Cow"),
       ),
     );
   }
