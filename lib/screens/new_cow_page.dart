@@ -7,16 +7,21 @@ import '../widgets/custom_textfield.dart';
 
 const List<String> breedList = [
   'Breed Type',
-  'Cow',
-  'Heifer',
+  'Friesian',
+  'Arshire',
   'Bull',
-  'Weaner',
+  'Cow',
   'Calf',
 ];
 
 const List<String> acquireList = [
   "Bought",
   "Born",
+];
+
+const List<String> genderList = [
+  "Male",
+  "Female",
 ];
 
 class NewCowPage extends StatefulWidget {
@@ -30,30 +35,28 @@ class _NewCowPageState extends State<NewCowPage> {
   final breedController = TextEditingController();
   final nameController = TextEditingController();
   final tagNoController = TextEditingController();
-  final genderController = TextEditingController();
   final weightController = TextEditingController();
   final dobController = TextEditingController();
   final entryDateController = TextEditingController();
-  final acquireModeController = TextEditingController();
   final notesController = TextEditingController();
 
   final nameNode = FocusNode();
   final breedNode = FocusNode();
   final tagNoNode = FocusNode();
-  final genderNode = FocusNode();
   final weightNode = FocusNode();
   final dobNode = FocusNode();
   final entryDateNode = FocusNode();
-  final acquireNode = FocusNode();
   final notesNode = FocusNode();
 
   // Initial Selected Value
   String breedDropdownValue = 'Breed Type';
   String acquireDropdownValue = "Bought";
+  String genderDropdownValue = "Female";
 
   // List of items in our dropdown menu
   String breedValue = breedList.first;
   String acquireValue = acquireList.first;
+  String genderValue = genderList.first;
 
   @override
   Widget build(BuildContext context) {
@@ -66,9 +69,7 @@ class _NewCowPageState extends State<NewCowPage> {
           weightNode.unfocus();
           dobNode.unfocus();
           entryDateNode.unfocus();
-          acquireNode.unfocus();
           notesNode.unfocus();
-          genderNode.unfocus();
         },
         child: Scaffold(
           appBar: myAppBar("Add Cow"),
@@ -103,10 +104,18 @@ class _NewCowPageState extends State<NewCowPage> {
                       focusNode: weightNode,
                       controller: weightController,
                       hintText: "Weight"),
-                  customTextField(
-                      focusNode: genderNode,
-                      controller: genderController,
-                      hintText: "Gender"),
+                  SizedBox(height: 10),
+                  customDropdown(
+                    context: context,
+                    defaultValue: genderValue,
+                    list: genderList,
+                    onChanged: (val) {
+                      setState(() {
+                        genderValue = val!;
+                      });
+                    },
+                  ),
+                  SizedBox(height: 10),
                   customTextField(
                       focusNode: dobNode,
                       controller: dobController,

@@ -25,6 +25,7 @@ class IconsGrid extends StatelessWidget {
                         builder: (context) => _homeActions[index]['route']));
                   },
                   child: Container(
+                    width: 150,
                     padding: EdgeInsets.all(16),
                     decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey),
