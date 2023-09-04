@@ -1,13 +1,17 @@
+// ignore_for_file: must_be_immutable
+
+import 'package:efarm/controllers/bindings.dart';
+import 'package:efarm/screens/cow_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import './screens/homepage.dart';
+import './screens/screens.dart';
 import './utils/app_colors.dart';
 
-void main() => runApp(const MyApp());
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +23,25 @@ class MyApp extends StatelessWidget {
             ColorScheme.fromSeed(seedColor: AppColors.primaryBlueColor),
         useMaterial3: true,
       ),
-      home: HomepageScreen(),
+      initialRoute: "/",
+      getPages: _pages,
     );
   }
+
+  List<GetPage> _pages = [
+    GetPage(
+        name: "/", page: () => const HomepageScreen(), binding: MyBindings()),
+    GetPage(
+        name: "/cows-page",
+        page: () => const CowsPage(),
+        binding: MyBindings()),
+    GetPage(
+        name: "/new-cow",
+        page: () => const NewCowPage(),
+        binding: MyBindings()),
+    GetPage(
+        name: "/cow-details",
+        page: () => const CowDetailsScreen(),
+        binding: MyBindings()),
+  ];
 }
