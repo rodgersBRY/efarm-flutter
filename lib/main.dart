@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
         binding: MyBindings()),
     GetPage(
         name: "/new-cow",
-        page: () => const NewCowPage(),
+        page: () => NewCowPage(),
         binding: MyBindings()),
     GetPage(
         name: "/cow-details",

@@ -38,7 +38,7 @@ class CowsController extends GetxController {
   Future<List<CowModel>> getCows() async {
     List<CowModel> cows = _cows;
 
-    await Future.delayed(Duration(seconds: 3));
+    await Future.delayed(Duration(seconds: 2));
 
     return cows;
   }

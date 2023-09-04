@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../models/cow.model.dart';
-import '../widgets/appbar.dart';
 import '../widgets/title_row.dart';
 
 class CowDetailsScreen extends StatelessWidget {
@@ -54,13 +53,12 @@ class CowDetailsScreen extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-        appBar: myAppBar(""),
         body: Column(
           children: [
             Container(
               width: double.infinity,
               height: MediaQuery.of(context).size.height * .3,
-              padding: const EdgeInsets.only(left: 10, top: 5, bottom: 10),
+              padding: const EdgeInsets.only(top: 5, right: 10, bottom: 10),
               decoration: BoxDecoration(
                   image: DecorationImage(
                 image: AssetImage("assets/cow_bg.jpg"),
@@ -70,23 +68,31 @@ class CowDetailsScreen extends StatelessWidget {
                 children: [
                   Container(
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
+                        IconButton(
+                          color: Colors.white,
+                          onPressed: () {
+                            Get.offNamed("/cows-page");
+                          },
+                          icon: Icon(Icons.arrow_back),
+                        ),
+                        SizedBox(width: 5),
                         Text(
                           cow.name,
                           style: TextStyle(fontSize: 25, color: Colors.white),
                         ),
+                        Expanded(child: Container()),
                         IconButton(
                           onPressed: () {},
-                          icon: Icon(Icons.more_vert,
-                              color: Colors.white, size: 30),
+                          icon: Icon(Icons.delete, color: Colors.white),
                         )
                       ],
                     ),
                   ),
                   Expanded(child: Container()),
                   Container(
+                    margin: const EdgeInsets.only(left: 10),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
@@ -100,7 +106,13 @@ class CowDetailsScreen extends StatelessWidget {
                 ],
               ),
             ),
-            titleContainer(icon: Icons.info, textTitle: "General Information"),
+            titleContainer(
+              icon: Icons.info,
+              textTitle: "General Details",
+              onClick: () {
+                Get.toNamed("/new-cow");
+              },
+            ),
             Expanded(
               child: SingleChildScrollView(
                 child: Container(

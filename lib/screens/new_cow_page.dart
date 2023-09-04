@@ -24,8 +24,11 @@ const List<String> genderList = [
   "Female",
 ];
 
+// ignore: must_be_immutable
 class NewCowPage extends StatefulWidget {
-  const NewCowPage({super.key});
+  bool? isEditing;
+
+  NewCowPage({super.key, this.isEditing = false});
 
   @override
   State<NewCowPage> createState() => _NewCowPageState();
@@ -39,6 +42,11 @@ class _NewCowPageState extends State<NewCowPage> {
   final dobController = TextEditingController();
   final entryDateController = TextEditingController();
   final notesController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   final nameNode = FocusNode();
   final breedNode = FocusNode();

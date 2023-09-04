@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 
 import '../utils/app_colors.dart';
 
-Container titleContainer({required IconData icon, required String textTitle}) {
+Container titleContainer({
+  required IconData icon,
+  required String textTitle,
+  required VoidCallback onClick,
+}) {
   return Container(
-    color: AppColors.secondaryWhiteColor,
+    color: AppColors.primaryBlueColor,
     padding: const EdgeInsets.all(5),
     child: Row(
       children: [
@@ -18,9 +22,12 @@ Container titleContainer({required IconData icon, required String textTitle}) {
           style: TextStyle(color: AppColors.accentWhiteColor),
         ),
         Expanded(child: Container()),
-        Icon(
-          Icons.edit,
-          color: AppColors.accentWhiteColor,
+        IconButton(
+          onPressed: onClick,
+          icon: Icon(
+            Icons.edit,
+            color: AppColors.accentWhiteColor,
+          ),
         ),
       ],
     ),
