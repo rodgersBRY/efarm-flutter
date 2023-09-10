@@ -38,6 +38,8 @@ class _NewCowPageState extends State<NewCowPage> {
   final breedController = TextEditingController();
   final nameController = TextEditingController();
   final tagNoController = TextEditingController();
+  final motherTagController = TextEditingController();
+  final fatherTagController = TextEditingController();
   final weightController = TextEditingController();
   final dobController = TextEditingController();
   final entryDateController = TextEditingController();
@@ -52,6 +54,8 @@ class _NewCowPageState extends State<NewCowPage> {
   final breedNode = FocusNode();
   final tagNoNode = FocusNode();
   final weightNode = FocusNode();
+  final fatherTagNode = FocusNode();
+  final motherTagNode = FocusNode();
   final dobNode = FocusNode();
   final entryDateNode = FocusNode();
   final notesNode = FocusNode();
@@ -75,6 +79,8 @@ class _NewCowPageState extends State<NewCowPage> {
           breedNode.unfocus();
           tagNoNode.unfocus();
           weightNode.unfocus();
+          fatherTagNode.unfocus();
+          motherTagNode.unfocus();
           dobNode.unfocus();
           entryDateNode.unfocus();
           notesNode.unfocus();
@@ -143,6 +149,16 @@ class _NewCowPageState extends State<NewCowPage> {
                       });
                     },
                   ),
+                  SizedBox(height: 10),
+                  customTextField(
+                      focusNode: motherTagNode,
+                      controller: motherTagController,
+                      hintText: "Mother's Tag No"),
+                  SizedBox(height: 10),
+                  customTextField(
+                      focusNode: fatherTagNode,
+                      controller: fatherTagController,
+                      hintText: "Father's Tag No"),
                   SizedBox(height: 25),
                   customButton("Add", context),
                   SizedBox(height: 25),

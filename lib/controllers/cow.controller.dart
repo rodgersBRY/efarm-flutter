@@ -1,45 +1,40 @@
-import 'package:efarm/models/cow.model.dart';
+import 'dart:convert';
+
+import '../models/cow.model.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 
 class CowsController extends GetxController {
-  List<CowModel> _cows = [
-    CowModel(
-      breed: "Aryshire",
-      name: "Joan",
-      tagNo: 23,
-      gender: "Female",
-      weight: 300,
-      dob: "2022-10-12",
-      modeOfAcquiring: "Born",
-      notes: "",
-    ),
-    CowModel(
-      breed: "Freisian",
-      name: "Mary",
-      tagNo: 1,
-      gender: "Female",
-      weight: 267,
-      dob: "2023-01-02",
-      modeOfAcquiring: "Bought",
-      notes: "",
-    ),
-    CowModel(
-      breed: "Weaner",
-      name: "J",
-      tagNo: 10,
-      gender: "Male",
-      weight: 301,
-      dob: "2022-01-02",
-      modeOfAcquiring: "Born",
-      notes: "Has a black eye deficiency",
-    ),
-  ];
+  List<CowModel> _cows = [];
 
   Future<List<CowModel>> getCows() async {
-    List<CowModel> cows = _cows;
+    try {
+      final resp =
+          await http.get(Uri.parse("http://10.0.2.2:3000/api/v1/cows/"));
 
-    await Future.delayed(Duration(seconds: 2));
+      if (resp.statusCode == 200) {
+        final jsonData = json.decode(resp.body);
 
-    return cows;
+        _cows = List<CowModel>.generate(
+            jsonData.length, (index) => CowModel.fromJson(jsonData[index]));
+      }
+
+      return _cows;
+    } catch (err) {
+      throw Exception(err);
+    }
+  }
+
+  Future addCow({required CowModel cow}) async {
+    final resp = await http.post(
+      Uri.parse("http://10.0.2.2:3000/api/v1/cows/new-cow"),
+      headers: {"Content-type": "application/json"},
+      body: json.encode({"cow": cow}),
+    );
+
+    Map<String, dynamic> jsonData = json.decode(resp.body);
+    if (resp.statusCode == 201) {
+      print(jsonData);
+    }
   }
 }

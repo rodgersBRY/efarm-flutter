@@ -6,6 +6,9 @@ class CowModel {
   int weight;
   String dob;
   String modeOfAcquiring;
+  List? offspring;
+  int? motherTag;
+  int? fatherTag;
   String notes;
 
   CowModel({
@@ -17,6 +20,9 @@ class CowModel {
     required this.dob,
     required this.modeOfAcquiring,
     required this.notes,
+    this.offspring,
+    this.fatherTag,
+    this.motherTag,
   });
 
   factory CowModel.fromJson(Map<String, dynamic> json) => CowModel(
@@ -27,6 +33,9 @@ class CowModel {
         weight: json["weight"],
         dob: json["dob"],
         modeOfAcquiring: json["modeOfAcquiring"],
+        motherTag: json["motherTag"],
+        fatherTag: json["fatherTag"],
+        offspring: json['offspring'],
         notes: json["notes"],
       );
 }

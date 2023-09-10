@@ -8,13 +8,15 @@ Container titleContainer({
   required VoidCallback onClick,
 }) {
   return Container(
+    height: 35,
     color: AppColors.primaryBlueColor,
     padding: const EdgeInsets.all(5),
     child: Row(
       children: [
         Icon(
-          icon,
+          Icons.info,
           color: AppColors.accentWhiteColor,
+          size: 12,
         ),
         SizedBox(width: 6),
         Text(
@@ -25,8 +27,9 @@ Container titleContainer({
         IconButton(
           onPressed: onClick,
           icon: Icon(
-            Icons.edit,
+            icon,
             color: AppColors.accentWhiteColor,
+            size: 12,
           ),
         ),
       ],

@@ -106,36 +106,51 @@ class CowDetailsScreen extends StatelessWidget {
                 ],
               ),
             ),
-            titleContainer(
-              icon: Icons.info,
-              textTitle: "General Details",
-              onClick: () {
-                Get.toNamed("/new-cow");
-              },
-            ),
             Expanded(
               child: SingleChildScrollView(
                 child: Container(
-                  padding: const EdgeInsets.all(10),
                   width: double.infinity,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      titleContainer(
+                        icon: Icons.edit,
+                        textTitle: "General Details",
+                        onClick: () {
+                          Get.toNamed("/new-cow", arguments: {"cow": cow});
+                        },
+                      ),
                       _customText("Tag No: ${cow.tagNo}"),
-                      SizedBox(height: 10),
                       _customText("Name: ${cow.name}"),
-                      SizedBox(height: 10),
                       _customText("D.O.B: ${formatDate(cow.dob)}"),
-                      SizedBox(height: 10),
                       _customText("Age: ${calculateAge(cow.dob)}"),
-                      SizedBox(height: 10),
                       _customText("Gender: ${cow.gender}"),
-                      SizedBox(height: 10),
                       _customText("Breed: ${cow.breed}"),
-                      SizedBox(height: 10),
+                      cow.motherTag != null
+                          ? _customText("Mother's Tag: ${cow.motherTag}")
+                          : Container(),
+                      cow.fatherTag != null
+                          ? _customText("Bull's Tag: ${cow.fatherTag}")
+                          : Container(),
                       _customText("Mode of Acquiring: ${cow.modeOfAcquiring}"),
-                      SizedBox(height: 10),
                       _customText("Notes: ${cow.notes}"),
+                      titleContainer(
+                        icon: Icons.lan,
+                        textTitle: "Offspring Details",
+                        onClick: () {},
+                      ),
+                      cow.offspring != null
+                          ? ListView.builder(
+                              shrinkWrap: true, // important to avoid rendering issues
+                              itemCount: cow.offspring!.length,
+                              itemBuilder: (context, index) {
+                                return ListTile(
+                                  leading: CircleAvatar(),
+                                  title: Text(cow.offspring![index]['tagNo'].toString()),
+                                  subtitle: Text(cow.offspring![index]['name']),
+                                );
+                              })
+                          : Container()
                     ],
                   ),
                 ),
@@ -147,12 +162,15 @@ class CowDetailsScreen extends StatelessWidget {
     );
   }
 
-  Text _customText(String text) {
-    return Text(
-      text,
-      style: TextStyle(
-        fontSize: 18,
-        color: const Color.fromARGB(255, 78, 78, 78),
+  Container _customText(String text) {
+    return Container(
+      padding: const EdgeInsets.all(10),
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: 18,
+          color: const Color.fromARGB(255, 78, 78, 78),
+        ),
       ),
     );
   }
