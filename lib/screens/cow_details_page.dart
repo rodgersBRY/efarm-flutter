@@ -133,7 +133,9 @@ class CowDetailsScreen extends StatelessWidget {
                           ? _customText("Bull's Tag: ${cow.fatherTag}")
                           : Container(),
                       _customText("Mode of Acquiring: ${cow.modeOfAcquiring}"),
-                      _customText("Notes: ${cow.notes}"),
+                      cow.notes != null
+                          ? _customText("Notes: ${cow.notes}")
+                          : Container(),
                       titleContainer(
                         icon: Icons.lan,
                         textTitle: "Offspring Details",
@@ -141,12 +143,14 @@ class CowDetailsScreen extends StatelessWidget {
                       ),
                       cow.offspring != null
                           ? ListView.builder(
-                              shrinkWrap: true, // important to avoid rendering issues
+                              shrinkWrap:
+                                  true, // important to avoid rendering issues
                               itemCount: cow.offspring!.length,
                               itemBuilder: (context, index) {
                                 return ListTile(
                                   leading: CircleAvatar(),
-                                  title: Text(cow.offspring![index]['tagNo'].toString()),
+                                  title: Text(cow.offspring![index]['tagNo']
+                                      .toString()),
                                   subtitle: Text(cow.offspring![index]['name']),
                                 );
                               })

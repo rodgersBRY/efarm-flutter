@@ -1,26 +1,34 @@
 import 'package:flutter/material.dart';
 
+import '../utils/app_colors.dart';
+
 Container customTextField({
+  required String labelText,
+  required TextEditingController textEditingController,
   required FocusNode focusNode,
-  required TextEditingController controller,
-  required String hintText,
+  TextInputType? textInputType,
+  int? maxLines,
 }) {
   return Container(
-    margin: EdgeInsets.symmetric(vertical: 10),
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.all(Radius.circular(10)),
-    ),
+    margin: const EdgeInsets.symmetric(vertical: 10),
     child: TextField(
-      controller: controller,
       focusNode: focusNode,
+      controller: textEditingController,
+      keyboardType: textInputType,
+      maxLines: maxLines,
       decoration: InputDecoration(
+        labelText: labelText,
+        labelStyle: TextStyle(color: AppColors.greyColor),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.blueGrey),
+          borderSide: BorderSide(color: AppColors.greyColor),
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.blueGrey),
+          borderSide: BorderSide(color: AppColors.greyColor),
         ),
-        hintText: hintText,
+        border: OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors.greyColor),
+          borderRadius: BorderRadius.circular(10.0),
+        ),
       ),
     ),
   );

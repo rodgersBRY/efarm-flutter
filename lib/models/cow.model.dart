@@ -9,7 +9,7 @@ class CowModel {
   List? offspring;
   int? motherTag;
   int? fatherTag;
-  String notes;
+  String? notes;
 
   CowModel({
     required this.breed,

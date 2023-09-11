@@ -35,13 +35,12 @@ class MyApp extends StatelessWidget {
         name: "/cows-page",
         page: () => const CowsPage(),
         binding: MyBindings()),
-    GetPage(
-        name: "/new-cow",
-        page: () => NewCowPage(),
-        binding: MyBindings()),
+    GetPage(name: "/new-cow", page: () => NewCowPage(), binding: MyBindings()),
     GetPage(
         name: "/cow-details",
         page: () => const CowDetailsScreen(),
         binding: MyBindings()),
+    GetPage(
+        name: "/milking-page", page: () => MilkPage(), binding: MyBindings())
   ];
 }
