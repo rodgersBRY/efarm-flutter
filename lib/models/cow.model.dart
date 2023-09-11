@@ -5,6 +5,7 @@ class CowModel {
   String gender;
   int weight;
   String dob;
+  bool milked;
   String modeOfAcquiring;
   List? offspring;
   int? motherTag;
@@ -18,6 +19,7 @@ class CowModel {
     required this.gender,
     required this.weight,
     required this.dob,
+    required this.milked,
     required this.modeOfAcquiring,
     required this.notes,
     this.offspring,
@@ -31,6 +33,7 @@ class CowModel {
         tagNo: json["tagNo"],
         gender: json["gender"],
         weight: json["weight"],
+        milked: json['milked'],
         dob: json["dob"],
         modeOfAcquiring: json["modeOfAcquiring"],
         motherTag: json["motherTag"],

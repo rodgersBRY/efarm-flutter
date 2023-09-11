@@ -105,7 +105,7 @@ class _CowsPageState extends State<CowsPage> {
                 .push(MaterialPageRoute(builder: (context) => NewCowPage()));
           },
           icon: Icon(Icons.add),
-          backgroundColor: AppColors.accentGreenColor,
+          backgroundColor: AppColors.primaryBlueColor.withOpacity(.9),
           foregroundColor: Colors.white,
         ),
       ),

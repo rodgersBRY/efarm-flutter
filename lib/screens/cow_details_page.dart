@@ -1,3 +1,4 @@
+import 'package:efarm/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -126,6 +127,18 @@ class CowDetailsScreen extends StatelessWidget {
                       _customText("Age: ${calculateAge(cow.dob)}"),
                       _customText("Gender: ${cow.gender}"),
                       _customText("Breed: ${cow.breed}"),
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        child: Text(
+                          "Milked: ${cow.milked ? 'YES' : 'NO'}",
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: cow.milked
+                                ? AppColors.accentGreenColor
+                                : Colors.red,
+                          ),
+                        ),
+                      ),
                       cow.motherTag != null
                           ? _customText("Mother's Tag: ${cow.motherTag}")
                           : Container(),
