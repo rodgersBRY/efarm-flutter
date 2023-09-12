@@ -1,9 +1,10 @@
 import 'dart:convert';
 
-import 'package:efarm/models/milking.model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+
+import '../models/milking.model.dart';
 
 class MilkingController extends GetxController {
   RxBool isLoading = false.obs;
@@ -45,8 +46,18 @@ class MilkingController extends GetxController {
     }
   }
 
-  Future<List<MilkingModel>> getCowMilkRecords() async {
+  Future<List<MilkingModel>> getCowMilkRecords({required int tagNo}) async {
     try {
+      final resp = await http
+          .get(Uri.parse("http://10.0.2.2:3000/api/v1/milking/$tagNo"));
+
+      if (resp.statusCode == 200) {
+        final jsonData = json.decode(resp.body);
+
+        _cowMilkRecords = List<MilkingModel>.generate(
+            jsonData.length, (index) => MilkingModel.fromJson(jsonData[index]));
+      }
+
       return _cowMilkRecords;
     } catch (err) {
       throw Exception(err);
