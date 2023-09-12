@@ -8,7 +8,7 @@
 PRODUCT_NAME = Smart Dairy;
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.dev.devsky;
+PRODUCT_BUNDLE_IDENTIFIER = com.dev.brian;
 
 // The copyright displayed in application information
 PRODUCT_COPYRIGHT = Copyright © 2023 com.example. All rights reserved.
