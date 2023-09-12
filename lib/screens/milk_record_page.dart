@@ -64,7 +64,8 @@ class _MilkRecordState extends State<MilkRecord> {
                       if (snapshot.hasError) {
                         return customErrorWidget();
                       } else {
-                        List<MilkingModel> records = snapshot.data!;
+                        // reverse the list to show latest on top
+                        List<MilkingModel> records = snapshot.data!.reversed.toList();
 
                         return Expanded(
                           child: ListView.builder(
