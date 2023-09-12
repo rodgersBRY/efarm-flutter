@@ -1,3 +1,4 @@
+import 'package:efarm/widgets/error_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -45,11 +46,7 @@ class _CowsPageState extends State<CowsPage> {
                     );
                   default:
                     if (snapshot.hasError) {
-                      return Expanded(
-                        child: const Center(
-                          child: Text("An error has occurred"),
-                        ),
-                      );
+                      return customErrorWidget();
                     } else {
                       List<CowModel> cows = snapshot.data!;
 

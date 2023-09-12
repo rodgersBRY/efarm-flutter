@@ -2,6 +2,7 @@
 
 import 'package:efarm/controllers/bindings.dart';
 import 'package:efarm/screens/cow_details_page.dart';
+import 'package:efarm/screens/milk_record_page.dart';
 import 'package:efarm/screens/new_milk_record_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -43,6 +44,8 @@ class MyApp extends StatelessWidget {
         binding: MyBindings()),
     GetPage(
         name: "/milking-page", page: () => MilkPage(), binding: MyBindings()),
+    GetPage(
+        name: "/milk-record", page: () => MilkRecord(), binding: MyBindings()),
     GetPage(
         name: "/new-milk-record",
         page: () => NewMilkRecordPage(),

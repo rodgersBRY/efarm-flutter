@@ -1,5 +1,6 @@
 import 'package:efarm/controllers/cow.controller.dart';
 import 'package:efarm/models/cow.model.dart';
+import 'package:efarm/widgets/error_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -38,15 +39,14 @@ class _MilkPageState extends State<MilkPage> {
                   case ConnectionState.none:
                   case ConnectionState.waiting:
                     return Expanded(
-                      child: Center(child: CircularProgressIndicator()),
+                      child: Center(
+                          child: CircularProgressIndicator(
+                        color: AppColors.accentGreenColor,
+                      )),
                     );
                   default:
                     if (snapshot.hasError) {
-                      return Expanded(
-                        child: const Center(
-                          child: Text("An error has occurred"),
-                        ),
-                      );
+                      return customErrorWidget();
                     } else {
                       List<CowModel> cows = snapshot.data!;
 
@@ -60,7 +60,13 @@ class _MilkPageState extends State<MilkPage> {
                               margin: const EdgeInsets.all(8.0),
                               child: ListTile(
                                 onTap: () {
-                                  // Get.toNamed("/");
+                                  Get.toNamed(
+                                    "/milk-record",
+                                    arguments: {
+                                      "appTitle": cows[index].name,
+                                      "tagNo": cows[index].tagNo,
+                                    },
+                                  );
                                 },
                                 title: Text(
                                   '${cows[index].name}',

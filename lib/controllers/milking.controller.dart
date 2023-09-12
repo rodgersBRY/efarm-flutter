@@ -9,6 +9,7 @@ import '../models/milking.model.dart';
 class MilkingController extends GetxController {
   RxBool isLoading = false.obs;
   List<MilkingModel> _cowMilkRecords = [];
+  RxInt totalYield = 0.obs;
 
   Future addMilkRecord({required Map<String, dynamic> record}) async {
     isLoading.value = true;
@@ -56,6 +57,14 @@ class MilkingController extends GetxController {
 
         _cowMilkRecords = List<MilkingModel>.generate(
             jsonData.length, (index) => MilkingModel.fromJson(jsonData[index]));
+
+        totalYield.value =
+            _cowMilkRecords.fold(0, (int sum, MilkingModel json) {
+          int yield = json.yield;
+          return sum + yield;
+        });
+
+        print("total yield: $totalYield");
       }
 
       return _cowMilkRecords;
