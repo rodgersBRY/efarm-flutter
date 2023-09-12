@@ -24,42 +24,67 @@ class _NewMilkRecordPageState extends State<NewMilkRecordPage> {
   FocusNode tagNoNode = new FocusNode();
   FocusNode observationsNode = new FocusNode();
 
-  void _submitData() {
-    // Implement your data submission logic here
-    // You can access the entered data using the controller values
+  void _submitData() async {
+    if (tagNoController.text.isEmpty ||
+        yieldController.text.isEmpty ||
+        yieldOnCalfController.text.isEmpty) {
+      Get.snackbar(
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+          icon: Icon(
+            Icons.error,
+            color: Colors.white,
+          ),
+          "Error",
+          "Please fill in all the fields before submitting");
+    } else {
+      var newRecord = {
+        "tagNo": tagNoController.text.trim(),
+        "yield": yieldController.text.trim(),
+        "yieldOnCalf": yieldOnCalfController.text.trim(),
+        "observations": observationsController.text.trim(),
+      };
 
-    // Simulate a network request or data processing
-    Future.delayed(Duration(seconds: 2), () {
-      setState(() {});
-    });
+      await _milkingController.addMilkRecord(record: newRecord);
+
+      Get.offNamed("/milking-page");
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: myAppBar("Milking Page"),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 5),
-        child: Expanded(
-          child: SingleChildScrollView(
+    return GestureDetector(
+      onTap: () {
+        tagNoNode.unfocus();
+        yieldNode.unfocus();
+        yieldOnCalfNode.unfocus();
+        observationsNode.unfocus();
+      },
+      child: Scaffold(
+        appBar: myAppBar("New Record"),
+        body: SingleChildScrollView(
+          child: Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            padding: const EdgeInsets.symmetric(horizontal: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 15),
                 customTextField(
-                  labelText: "Tag Number",
+                  labelText: "Tag Number*",
                   textEditingController: tagNoController,
                   focusNode: tagNoNode,
                 ),
                 SizedBox(height: 16.0),
                 customTextField(
-                  labelText: "Yield",
+                  labelText: "Yield*",
                   textEditingController: yieldController,
                   focusNode: yieldNode,
                 ),
                 SizedBox(height: 16.0),
                 customTextField(
-                  labelText: "Yield On Calf",
+                  labelText: "Yield On Calf*",
                   textEditingController: yieldOnCalfController,
                   focusNode: yieldOnCalfNode,
                 ),
@@ -77,6 +102,19 @@ class _NewMilkRecordPageState extends State<NewMilkRecordPage> {
                       context: context,
                       isLoading: _milkingController.isLoading,
                       func: _submitData),
+                ),
+                Container(
+                  height: MediaQuery.of(context).size.width * .1,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.info, size: 15, color: Colors.red),
+                      Text(
+                        "All fields marked with * are required",
+                        style: TextStyle(fontSize: 13, color: Colors.red),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),

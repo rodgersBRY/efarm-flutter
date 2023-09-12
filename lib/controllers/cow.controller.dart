@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 
 class CowsController extends GetxController {
   List<CowModel> _cows = [];
+  List<CowModel> _milkedCows = [];
   RxBool isLoading = false.obs;
 
   Future<List<CowModel>> getCows() async {
@@ -42,6 +43,7 @@ class CowsController extends GetxController {
           "gender": cow.gender,
           "weight": cow.weight,
           "dob": cow.dob,
+          "milked": cow.milked,
           "modeOfAcquiring": cow.modeOfAcquiring,
           "motherTag": cow.motherTag ?? "",
           "fatherTag": cow.fatherTag ?? "",
@@ -65,8 +67,25 @@ class CowsController extends GetxController {
       }
     } catch (err) {
       isLoading.value = false;
-      print(err);
-      Get.snackbar("Error", "err");
+      Get.snackbar("Error", "Error saving the details");
+      throw Exception(err);
+    }
+  }
+
+  Future<List<CowModel>> getMilkedCows() async {
+    try {
+      final resp =
+          await http.get(Uri.parse("http://10.0.2.2:3000/api/v1/cows/milked"));
+
+      if (resp.statusCode == 200) {
+        final jsonData = json.decode(resp.body);
+
+        _milkedCows = List<CowModel>.generate(
+            jsonData.length, (index) => CowModel.fromJson(jsonData[index]));
+      }
+
+      return _milkedCows;
+    } catch (err) {
       throw Exception(err);
     }
   }
