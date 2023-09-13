@@ -6,6 +6,8 @@ import '../models/cow.model.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
+String httpAuthority = "efarm-api.vercel.app";
+
 class CowsController extends GetxController {
   List<CowModel> _cows = [];
   List<CowModel> _milkedCows = [];
@@ -13,8 +15,9 @@ class CowsController extends GetxController {
 
   Future<List<CowModel>> getCows() async {
     try {
-      final resp =
-          await http.get(Uri.parse("https://efarm-api.vercel.app/api/v1/cows/"));
+      final resp = await http.get(
+        Uri.parse("https://efarm-api.vercel.app/api/v1/cows"),
+      );
 
       if (resp.statusCode == 200) {
         final jsonData = json.decode(resp.body);
@@ -74,8 +77,8 @@ class CowsController extends GetxController {
 
   Future<List<CowModel>> getMilkedCows() async {
     try {
-      final resp =
-          await http.get(Uri.parse("https://efarm-api.vercel.app/api/v1/cows/milked"));
+      final resp = await http
+          .get(Uri.parse("https://efarm-api.vercel.app/api/v1/cows/milked"));
 
       if (resp.statusCode == 200) {
         final jsonData = json.decode(resp.body);

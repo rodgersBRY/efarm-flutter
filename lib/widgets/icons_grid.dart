@@ -11,8 +11,8 @@ class IconsGrid extends StatelessWidget {
     return GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          mainAxisSpacing: 0,
-          crossAxisSpacing: 0,
+          mainAxisSpacing: 10,
+          crossAxisSpacing: 10,
         ),
         itemCount: _homeActions.length,
         itemBuilder: (context, index) {
@@ -26,6 +26,7 @@ class IconsGrid extends StatelessWidget {
                   },
                   child: Container(
                     width: 150,
+                    height: 140,
                     padding: EdgeInsets.all(16),
                     decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey),

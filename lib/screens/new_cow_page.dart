@@ -173,7 +173,7 @@ class _NewCowPageState extends State<NewCowPage> {
                 customTextField(
                     focusNode: weightNode,
                     textEditingController: weightController,
-                    labelText: "Weight"),
+                    labelText: "Weight (Kgs)"),
                 customDropdown(
                   context: context,
                   defaultValue: genderValue,
