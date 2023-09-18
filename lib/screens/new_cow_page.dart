@@ -12,8 +12,6 @@ import '../widgets/custom_textfield.dart';
 
 const List<String> breedList = [
   'Breed Type',
-  'Friesian',
-  'Arshire',
   'Bull',
   'Cow',
   'Calf',
@@ -31,17 +29,19 @@ const List<String> genderList = [
 
 // ignore: must_be_immutable
 class NewCowPage extends StatefulWidget {
-  bool? isEditing;
+  final bool? isEditing;
+  final CowModel? cow;
 
-  NewCowPage({super.key, this.isEditing = false});
+  NewCowPage({super.key, this.isEditing = false, this.cow});
 
   @override
   State<NewCowPage> createState() => _NewCowPageState();
 }
 
 class _NewCowPageState extends State<NewCowPage> {
+  CowsController _cowsController = Get.find();
+
   DateTime selectedDate = DateTime.now();
-  final _cowsController = CowsController();
 
   final nameController = TextEditingController();
   final tagNoController = TextEditingController();
@@ -53,6 +53,18 @@ class _NewCowPageState extends State<NewCowPage> {
   @override
   void initState() {
     super.initState();
+
+    if (widget.isEditing == true) {
+      breedValue = widget.cow!.breed;
+      genderValue = widget.cow!.gender;
+      selectedDate = widget.cow!.dob as DateTime;
+      isMilked.value = widget.cow!.milked;
+      nameController.text = widget.cow!.name;
+      acquireValue = widget.cow!.modeOfAcquiring;
+      tagNoController.text = "${widget.cow!.tagNo}";
+      weightController.text = "${widget.cow!.weight}";
+      notesController.text = widget.cow!.notes!;
+    }
   }
 
   final nameNode = FocusNode();
@@ -95,14 +107,24 @@ class _NewCowPageState extends State<NewCowPage> {
         tagNoController.text.isEmpty ||
         weightController.text.isEmpty) {
       Get.snackbar(
-          backgroundColor: Colors.red,
-          colorText: Colors.white,
+          backgroundColor: Colors.white,
+          colorText: Colors.red,
           icon: Icon(
             Icons.error,
-            color: Colors.white,
+            color: Colors.red,
           ),
           "Error",
           "Please fill in all the fields before submitting");
+    } else if (breedValue == "Breed Type") {
+      Get.snackbar(
+          backgroundColor: Colors.white,
+          colorText: Colors.red,
+          icon: Icon(
+            Icons.error,
+            color: Colors.red,
+          ),
+          "Error",
+          "Please select a breed type before submitting");
     } else {
       // convert DateTime to String
       final dateStr = DateFormat('yyy-MM-dd').format(selectedDate);
@@ -144,7 +166,7 @@ class _NewCowPageState extends State<NewCowPage> {
         notesNode.unfocus();
       },
       child: Scaffold(
-        appBar: myAppBar("Add Cow"),
+        appBar: myAppBar(title: "Add Cow"),
         body: SingleChildScrollView(
           child: Container(
             width: MediaQuery.of(context).size.width,

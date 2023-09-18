@@ -11,12 +11,16 @@ String httpAuthority = "efarm-api.vercel.app";
 class CowsController extends GetxController {
   List<CowModel> _cows = [];
   List<CowModel> _milkedCows = [];
+
+  List<CowModel> get cows => _cows;
+  List<CowModel> get milkedCows => _milkedCows;
+
   RxBool isLoading = false.obs;
 
   Future<List<CowModel>> getCows() async {
     try {
       final resp = await http.get(
-        Uri.parse("https://efarm-api.vercel.app/api/v1/cows"),
+        Uri.parse("http://10.0.2.2:3000/api/v1/cows"),
       );
 
       if (resp.statusCode == 200) {
@@ -37,7 +41,7 @@ class CowsController extends GetxController {
 
     try {
       final resp = await http.post(
-        Uri.parse("https://efarm-api.vercel.app/api/v1/cows/new-cow"),
+        Uri.parse("http://10.0.2.2:3000/api/v1/cows/new-cow"),
         headers: {"Content-type": "application/json"},
         body: json.encode({
           "name": cow.name,
@@ -77,8 +81,8 @@ class CowsController extends GetxController {
 
   Future<List<CowModel>> getMilkedCows() async {
     try {
-      final resp = await http
-          .get(Uri.parse("https://efarm-api.vercel.app/api/v1/cows/milked"));
+      final resp =
+          await http.get(Uri.parse("http://10.0.2.2:3000/api/v1/cows/milked"));
 
       if (resp.statusCode == 200) {
         final jsonData = json.decode(resp.body);

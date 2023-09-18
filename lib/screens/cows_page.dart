@@ -28,7 +28,7 @@ class _CowsPageState extends State<CowsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: myAppBar("My Cows"),
+      appBar: myAppBar(title: "My Cows"),
       body: Column(
         children: [
           SizedBox(height: 5),
@@ -71,7 +71,7 @@ class _CowsPageState extends State<CowsPage> {
                                 margin: const EdgeInsets.all(8.0),
                                 child: ListTile(
                                   onTap: () {
-                                    Get.toNamed(
+                                    Get.offNamed(
                                       '/cow-details',
                                       arguments: {"cow": cows[index]},
                                     );

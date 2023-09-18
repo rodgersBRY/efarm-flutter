@@ -24,14 +24,14 @@ Container titleContainer({
           style: TextStyle(color: AppColors.accentWhiteColor),
         ),
         Expanded(child: Container()),
-        IconButton(
-          onPressed: onClick,
-          icon: Icon(
-            icon,
-            color: AppColors.accentWhiteColor,
-            size: 12,
-          ),
-        ),
+        // IconButton(
+        //   onPressed: onClick,
+        //   icon: Icon(
+        //     icon,
+        //     color: AppColors.accentWhiteColor,
+        //     size: 12,
+        //   ),
+        // ),
       ],
     ),
   );

@@ -61,7 +61,7 @@ class _NewMilkRecordPageState extends State<NewMilkRecordPage> {
         observationsNode.unfocus();
       },
       child: Scaffold(
-        appBar: myAppBar("New Record"),
+        appBar: myAppBar(title: "New Record"),
         body: SingleChildScrollView(
           child: Container(
             height: MediaQuery.of(context).size.height,

@@ -9,7 +9,7 @@ class BreedingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: myAppBar("Breeding"),
+        appBar: myAppBar(title: "Breeding"),
       ),
     );
   }

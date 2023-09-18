@@ -15,7 +15,7 @@ class MilkingController extends GetxController {
     isLoading.value = true;
     try {
       final resp = await http.post(
-        Uri.parse("https://efarm-api.vercel.app/api/v1/milking/new"),
+        Uri.parse("http://10.0.2.2:3000/api/v1/milking/new"),
         headers: {"Content-type": "application/json"},
         body: json.encode({
           "tagNo": record['tagNo'],
@@ -50,7 +50,7 @@ class MilkingController extends GetxController {
   Future<List<MilkingModel>> getCowMilkRecords({required int tagNo}) async {
     try {
       final resp = await http
-          .get(Uri.parse("http://efarm-api.vercel.app/api/v1/milking/$tagNo"));
+          .get(Uri.parse("http://10.0.2.2:3000/api/v1/milking/$tagNo"));
 
       if (resp.statusCode == 200) {
         final jsonData = json.decode(resp.body);

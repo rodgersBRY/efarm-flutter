@@ -30,7 +30,7 @@ class _MilkRecordState extends State<MilkRecord> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: myAppBar(appTitle),
+      appBar: myAppBar(title: appTitle),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 5),
         child: Column(

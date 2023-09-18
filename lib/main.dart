@@ -50,5 +50,12 @@ class MyApp extends StatelessWidget {
         name: "/new-milk-record",
         page: () => NewMilkRecordPage(),
         binding: MyBindings()),
+    GetPage(
+        name: "/sales-page", page: () => SalesPage(), binding: MyBindings()),
+    GetPage(
+        name: "/employee-page",
+        page: () => EmployeesPage(),
+        binding: MyBindings()),
+    GetPage(name: "/bredding-page", page: () => BreedingPage()),
   ];
 }

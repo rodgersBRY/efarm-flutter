@@ -14,7 +14,7 @@ class _SalesPageState extends State<SalesPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: myAppBar("My Sales"),
+        appBar: myAppBar(title: "My Sales"),
       ),
     );
   }

@@ -28,7 +28,7 @@ class _MilkPageState extends State<MilkPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: myAppBar("Milk Records"),
+      appBar: myAppBar(title: "Milk Records"),
       body: Column(
         children: [
           SizedBox(height: 5),

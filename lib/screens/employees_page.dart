@@ -9,7 +9,7 @@ class EmployeesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: myAppBar("My Employees"),
+        appBar: myAppBar(title: "My Employees"),
       ),
     );
   }

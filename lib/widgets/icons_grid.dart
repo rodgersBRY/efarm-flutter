@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import '../screens/screens.dart';
 import '../utils/app_colors.dart';
 
 class IconsGrid extends StatelessWidget {
@@ -21,8 +21,7 @@ class IconsGrid extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => _homeActions[index]['route']));
+                    Get.toNamed(_homeActions[index]['route']);
                   },
                   child: Container(
                     width: 150,
@@ -55,27 +54,27 @@ class IconsGrid extends StatelessWidget {
     {
       "title": 'Cows',
       "icon": 'assets/cows.png',
-      "route": CowsPage(),
+      "route": "/cows-page",
     },
     {
       "title": 'Milking',
       "icon": 'assets/milk.png',
-      "route": MilkPage(),
+      "route": "/milking-page",
     },
     {
       "title": 'Sales',
       "icon": 'assets/sales.png',
-      "route": SalesPage(),
+      "route": "/sales-page",
     },
     {
       "title": 'My Employees',
       "icon": 'assets/employees.png',
-      "route": EmployeesPage(),
+      "route": "/employee-page",
     },
     {
       "title": 'Breeding',
       "icon": 'assets/breed.png',
-      "route": BreedingPage(),
+      "route": "/breeding-page",
     },
   ];
 }

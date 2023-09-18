@@ -1,3 +1,4 @@
+import 'package:efarm/screens/new_cow_page.dart';
 import 'package:efarm/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -84,10 +85,29 @@ class CowDetailsScreen extends StatelessWidget {
                           style: TextStyle(fontSize: 25, color: Colors.white),
                         ),
                         Expanded(child: Container()),
-                        IconButton(
-                          onPressed: () {},
-                          icon: Icon(Icons.delete, color: Colors.white),
-                        )
+                        PopupMenuButton<int>(
+                            iconColor: Colors.white,
+                            onSelected: (value) {
+                              switch (value) {
+                                case 0:
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (builder) =>
+                                          NewCowPage(isEditing: true),
+                                    ),
+                                  );
+                                  // Get.toNamed(
+                                  //   "/new-cow",
+                                  //   arguments: {"cow": cow, "editing": true},
+                                  // );
+                                case 1:
+                                  break;
+                              }
+                            },
+                            itemBuilder: (context) => [
+                                  PopupMenuItem(value: 0, child: Text("Edit")),
+                                  PopupMenuItem(child: Text("Delete")),
+                                ])
                       ],
                     ),
                   ),
