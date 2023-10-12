@@ -71,10 +71,5 @@ class IconsGrid extends StatelessWidget {
       "icon": 'assets/employees.png',
       "route": "/employee-page",
     },
-    {
-      "title": 'Breeding',
-      "icon": 'assets/breed.png',
-      "route": "/breeding-page",
-    },
   ];
 }

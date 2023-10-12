@@ -40,6 +40,10 @@ dependencies:
   flutter_native_splash: ^2.3.2
   intl: ^0.18.1
   http: ^1.1.0
+  gap: ^3.0.1
+  shared_preferences: ^2.2.1
+  api_cache_manager: ^1.0.2
+  snippet_coder_utils: ^1.0.14
 
 dev_dependencies:
   flutter_test:

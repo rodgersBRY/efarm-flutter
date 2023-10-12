@@ -1,11 +1,11 @@
-import 'package:efarm/controllers/cow.controller.dart';
-import 'package:efarm/models/cow.model.dart';
-import 'package:efarm/widgets/error_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../controllers/cow.controller.dart';
+import '../models/cow.model.dart';
 import '../utils/app_colors.dart';
 import '../widgets/appbar.dart';
+import '../widgets/error_text_widget.dart';
 
 class MilkPage extends StatefulWidget {
   const MilkPage({super.key});
