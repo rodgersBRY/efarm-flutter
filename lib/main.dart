@@ -1,17 +1,16 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:efarm/controllers/bindings.dart';
-import 'package:efarm/screens/auth/login.dart';
-import 'package:efarm/screens/cow_details_page.dart';
-import 'package:efarm/screens/milk_record_page.dart';
-import 'package:efarm/screens/new_milk_record_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import './controllers/bindings.dart';
 import './screens/screens.dart';
 import './utils/app_colors.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  MyApp();
+}
 
 class MyApp extends StatelessWidget {
   MyApp({super.key});

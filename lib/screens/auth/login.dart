@@ -31,12 +31,45 @@ class _LoginPageState extends State<LoginPage> {
       Get.snackbar(
         "Warninng",
         "Please enter your email or password!",
-        icon: Icon(Icons.warning),
+        icon: Icon(Icons.warning, color: Colors.white),
         backgroundColor: Colors.orange,
+        colorText: Colors.white,
       );
     } else {
-      await _userController.login(
-          email: email.trim(), password: password.trim());
+      var status = await _userController.login(
+        email: email.trim(),
+        password: password.trim(),
+      );
+
+      if (status == 200) {
+        Get.snackbar(
+          "Success",
+          "Logged in successfully",
+          colorText: Colors.white,
+          backgroundColor: Colors.green,
+          icon: Icon(Icons.check_circle_outline, color: Colors.white),
+        );
+
+        Get.offNamed('/');
+      } // email not found
+      else if (status == 404) {
+        Get.snackbar(
+          "Error",
+          "No user with that email",
+          icon: Icon(Icons.warning, color: Colors.white),
+          backgroundColor: Colors.orange,
+          colorText: Colors.white,
+        );
+      } // wrong password
+      else if (status == 401) {
+        Get.snackbar(
+          "Error",
+          "Password is incorrect",
+          colorText: Colors.white,
+          backgroundColor: Colors.orange,
+          icon: Icon(Icons.warning, color: Colors.white),
+        );
+      }
     }
   }
 
