@@ -1,10 +1,11 @@
-import 'package:efarm/controllers/milking.controller.dart';
-import 'package:efarm/models/milking.model.dart';
-import 'package:efarm/utils/app_colors.dart';
-import 'package:efarm/widgets/appbar.dart';
-import 'package:efarm/widgets/error_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../controllers/milking.controller.dart';
+import '../models/milking.model.dart';
+import '../utils/app_colors.dart';
+import '../widgets/appbar.dart';
+import '../widgets/error_text_widget.dart';
 
 class MilkRecord extends StatefulWidget {
   const MilkRecord({super.key});
