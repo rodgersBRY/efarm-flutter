@@ -59,7 +59,23 @@ class _CowDetailsScreenState extends State<CowDetailsScreen> {
   deleteCow(String cowId) async {
     var response = await _cowsController.deleteCow(cowId: cowId);
 
-    print(response);
+    if (response == 204) {
+      Navigator.of(context).pop();
+      Get.snackbar(
+        "Success",
+        "The record has been deleted",
+        icon: Icon(Icons.check_circle_outline),
+        backgroundColor: Colors.white,
+      );
+      Get.offNamed('/cows-page');
+    } else {
+      Navigator.of(context).pop();
+      Get.snackbar(
+        "Error",
+        "Failed to delete the record",
+        colorText: Colors.red,
+      );
+    }
   }
 
   @override
@@ -104,7 +120,30 @@ class _CowDetailsScreenState extends State<CowDetailsScreen> {
                                 context: context,
                                 builder: (context) {
                                   return AlertDialog(
-                                    title: Text("Are you sure you want to delete?"),
+                                    title: Text(
+                                        "Are you sure you want to delete?"),
+                                    actions: [
+                                      TextButton(
+                                        style: ButtonStyle(
+                                          foregroundColor:
+                                              MaterialStateProperty.all<Color>(
+                                                  Colors.grey),
+                                        ),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: Text("Cancel"),
+                                      ),
+                                      TextButton(
+                                        style: ButtonStyle(
+                                          foregroundColor:
+                                              MaterialStateProperty.all<Color>(
+                                                  AppColors.primaryGreenColor),
+                                        ),
+                                        onPressed: () => deleteCow(cow.id),
+                                        child: Text("Okay"),
+                                      ),
+                                    ],
                                   );
                                 });
                           },

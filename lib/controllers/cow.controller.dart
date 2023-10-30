@@ -93,17 +93,15 @@ class CowsController extends GetxController {
   Future deleteCow({required String cowId}) async {
     isLoading.value = true;
 
+    print(cowId);
+
     try {
       final resp = await http
-          .delete(Uri.parse("http://10.0.2.2:3000/api/v1/delete/$cowId"));
+          .delete(Uri.parse("http://10.0.2.2:3000/api/v1/cows/delete/$cowId"));
 
       isLoading.value = false;
 
-      if (resp.statusCode == 204) {
-        Get.snackbar("Success", "The record has been deleted");
-      } else {
-        print(resp.statusCode);
-      }
+      return resp.statusCode;
     } catch (err) {
       isLoading.value = false;
       throw Exception(err);
