@@ -141,7 +141,7 @@ class _CowDetailsScreenState extends State<CowDetailsScreen> {
                                                   AppColors.primaryGreenColor),
                                         ),
                                         onPressed: () => deleteCow(cow.id),
-                                        child: Text("Okay"),
+                                        child: Text("Delete"),
                                       ),
                                     ],
                                   );

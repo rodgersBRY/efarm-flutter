@@ -97,7 +97,7 @@ class CowsController extends GetxController {
 
     try {
       final resp = await http
-          .delete(Uri.parse("http://10.0.2.2:3000/api/v1/cows/delete/$cowId"));
+          .delete(Uri.parse("https://efarm-api.vercel.app/api/v1/cows/delete/$cowId"));
 
       isLoading.value = false;
 

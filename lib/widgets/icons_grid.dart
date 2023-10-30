@@ -62,6 +62,11 @@ class IconsGrid extends StatelessWidget {
       "route": MilkPage(),
     },
     {
+      "title": 'Breeding',
+      "icon": 'assets/breed.png',
+      "route": BreedingPage(),
+    },
+    {
       "title": 'Sales',
       "icon": 'assets/sales.png',
       "route": SalesPage(),
@@ -70,11 +75,6 @@ class IconsGrid extends StatelessWidget {
       "title": 'My Employees',
       "icon": 'assets/employees.png',
       "route": EmployeesPage(),
-    },
-    {
-      "title": 'Breeding',
-      "icon": 'assets/breed.png',
-      "route": BreedingPage(),
     },
   ];
 }
