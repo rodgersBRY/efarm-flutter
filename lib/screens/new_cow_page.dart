@@ -12,8 +12,6 @@ import '../widgets/custom_textfield.dart';
 
 const List<String> breedList = [
   'Breed Type',
-  'Friesian',
-  'Arshire',
   'Bull',
   'Cow',
   'Calf',

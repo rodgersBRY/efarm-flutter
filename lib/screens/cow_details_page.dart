@@ -1,3 +1,4 @@
+import 'package:efarm/controllers/cow.controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -6,8 +7,15 @@ import '../models/cow.model.dart';
 import '../utils/app_colors.dart';
 import '../widgets/title_row.dart';
 
-class CowDetailsScreen extends StatelessWidget {
-  const CowDetailsScreen({super.key});
+class CowDetailsScreen extends StatefulWidget {
+  CowDetailsScreen({super.key});
+
+  @override
+  State<CowDetailsScreen> createState() => _CowDetailsScreenState();
+}
+
+class _CowDetailsScreenState extends State<CowDetailsScreen> {
+  CowsController _cowsController = Get.find();
 
   String formatDate(String date) {
     return DateFormat.yMMM().format(DateTime.parse(date));
@@ -48,6 +56,12 @@ class CowDetailsScreen extends StatelessWidget {
     return age.toString();
   }
 
+  deleteCow(String cowId) async {
+    var response = await _cowsController.deleteCow(cowId: cowId);
+
+    print(response);
+  }
+
   @override
   Widget build(BuildContext context) {
     CowModel cow = Get.arguments['cow'];
@@ -85,7 +99,15 @@ class CowDetailsScreen extends StatelessWidget {
                         ),
                         Expanded(child: Container()),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    title: Text("Are you sure you want to delete?"),
+                                  );
+                                });
+                          },
                           icon: Icon(Icons.delete, color: Colors.white),
                         )
                       ],
