@@ -1,5 +1,4 @@
 class CowModel {
-  String id;
   String breed;
   String name;
   int tagNo;
@@ -14,7 +13,6 @@ class CowModel {
   String? notes;
 
   CowModel({
-    required this.id,
     required this.breed,
     required this.name,
     required this.tagNo,
@@ -30,7 +28,6 @@ class CowModel {
   });
 
   factory CowModel.fromJson(Map<String, dynamic> json) => CowModel(
-        id: json["_id"],
         breed: json["breed"],
         name: json["name"],
         tagNo: json["tagNo"],

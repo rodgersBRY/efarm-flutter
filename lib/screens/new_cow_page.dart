@@ -182,26 +182,38 @@ class _NewCowPageState extends State<NewCowPage> {
                     });
                   },
                 ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("${selectedDate.toLocal()}".split(' ')[0]),
-                      SizedBox(height: 5),
-                      ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                              AppColors.accentWhiteColor),
-                          foregroundColor: MaterialStateProperty.all(
-                              AppColors.primaryGreenColor),
-                        ),
-                        onPressed: () => _selectDate(context),
-                        child: const Text("Date of Birth"),
-                      ),
-                    ],
-                  ),
+                customDropdown(
+                  context: context,
+                  defaultValue: acquireValue,
+                  list: acquireList,
+                  onChanged: (val) {
+                    setState(() {
+                      acquireValue = val!;
+                    });
+                  },
                 ),
+                acquireValue == 'Born'
+                    ? Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("${selectedDate.toLocal()}".split(' ')[0]),
+                            SizedBox(height: 5),
+                            ElevatedButton(
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(
+                                    AppColors.accentWhiteColor),
+                                foregroundColor: MaterialStateProperty.all(
+                                    AppColors.primaryGreenColor),
+                              ),
+                              onPressed: () => _selectDate(context),
+                              child: const Text("Date of Birth"),
+                            ),
+                          ],
+                        ),
+                      )
+                    : Container(),
                 SizedBox(height: 10),
                 Container(
                   padding: const EdgeInsets.only(left: 10),
@@ -217,16 +229,6 @@ class _NewCowPageState extends State<NewCowPage> {
                           })),
                     ],
                   ),
-                ),
-                customDropdown(
-                  context: context,
-                  defaultValue: acquireValue,
-                  list: acquireList,
-                  onChanged: (val) {
-                    setState(() {
-                      acquireValue = val!;
-                    });
-                  },
                 ),
                 customTextField(
                     focusNode: motherTagNode,

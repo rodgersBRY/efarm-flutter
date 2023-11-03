@@ -50,7 +50,7 @@ class IconsGrid extends StatelessWidget {
         });
   }
 
-  final List _homeActions = [
+  final List adminActions = [
     {
       "title": 'Cows',
       "icon": 'assets/cows.png',
@@ -75,6 +75,24 @@ class IconsGrid extends StatelessWidget {
       "title": 'My Employees',
       "icon": 'assets/employees.png',
       "route": EmployeesPage(),
+    },
+  ];
+
+  final List _homeActions = [
+    {
+      "title": 'Cows',
+      "icon": 'assets/cows.png',
+      "route": CowsPage(),
+    },
+    {
+      "title": 'Milking',
+      "icon": 'assets/milk.png',
+      "route": MilkPage(),
+    },
+    {
+      "title": 'Breeding',
+      "icon": 'assets/breed.png',
+      "route": BreedingPage(),
     },
   ];
 }

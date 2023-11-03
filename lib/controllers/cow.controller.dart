@@ -29,6 +29,25 @@ class CowsController extends GetxController {
     }
   }
 
+  Future getMilkedCowTags() async {
+    List cowTags = [];
+
+    try {
+      final resp =
+          await http.get(Uri.parse("http://10.0.2.2:3000/api/v1/cows/milked"));
+
+      if (resp.statusCode == 200) {
+        final jsonData = json.decode(resp.body);
+
+        cowTags = jsonData.map((cow) => cow['tagNo'].toString()).toList();
+      }
+
+      return cowTags;
+    } catch (err) {
+      throw Exception(err);
+    }
+  }
+
   Future addCow({required CowModel cow}) async {
     isLoading.value = true;
 
@@ -90,14 +109,12 @@ class CowsController extends GetxController {
     }
   }
 
-  Future deleteCow({required String cowId}) async {
+  Future deleteCow({required int cowTag}) async {
     isLoading.value = true;
 
-    print(cowId);
-
     try {
-      final resp = await http
-          .delete(Uri.parse("https://efarm-api.vercel.app/api/v1/cows/delete/$cowId"));
+      final resp = await http.delete(
+          Uri.parse("https://efarm-api.vercel.app/api/v1/cows/delete/$cowTag"));
 
       isLoading.value = false;
 

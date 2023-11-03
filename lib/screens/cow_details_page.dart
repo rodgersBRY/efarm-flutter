@@ -56,8 +56,8 @@ class _CowDetailsScreenState extends State<CowDetailsScreen> {
     return age.toString();
   }
 
-  deleteCow(String cowId) async {
-    var response = await _cowsController.deleteCow(cowId: cowId);
+  deleteCow(int cowTag) async {
+    var response = await _cowsController.deleteCow(cowTag: cowTag);
 
     if (response == 204) {
       Navigator.of(context).pop();
@@ -134,15 +134,16 @@ class _CowDetailsScreenState extends State<CowDetailsScreen> {
                                         },
                                         child: Text("Cancel"),
                                       ),
-                                      TextButton(
+                                      Obx(() =>TextButton(
                                         style: ButtonStyle(
                                           foregroundColor:
                                               MaterialStateProperty.all<Color>(
                                                   AppColors.primaryGreenColor),
                                         ),
-                                        onPressed: () => deleteCow(cow.id),
-                                        child: Text("Delete"),
-                                      ),
+                                        onPressed: () => deleteCow(cow.tagNo),
+                                        child:  Text("Delete"),
+                                      )),
+                                      
                                     ],
                                   );
                                 });

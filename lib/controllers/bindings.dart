@@ -1,6 +1,7 @@
-import 'package:efarm/controllers/cow.controller.dart';
-import 'package:efarm/controllers/milking.controller.dart';
 import 'package:get/get.dart';
+
+import './cow.controller.dart';
+import './milking.controller.dart';
 
 class MyBindings extends Bindings {
   @override

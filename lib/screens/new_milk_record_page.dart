@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../controllers/cow.controller.dart';
 import '../controllers/milking.controller.dart';
 import '../widgets/appbar.dart';
 import '../widgets/custom_button.dart';
@@ -13,19 +14,32 @@ class NewMilkRecordPage extends StatefulWidget {
 
 class _NewMilkRecordPageState extends State<NewMilkRecordPage> {
   MilkingController _milkingController = Get.find();
+  CowsController _cowsController = Get.find();
 
-  TextEditingController tagNoController = TextEditingController();
   TextEditingController yieldController = TextEditingController();
   TextEditingController yieldOnCalfController = TextEditingController();
   TextEditingController observationsController = TextEditingController();
 
   FocusNode yieldOnCalfNode = new FocusNode();
   FocusNode yieldNode = new FocusNode();
-  FocusNode tagNoNode = new FocusNode();
   FocusNode observationsNode = new FocusNode();
 
-  void _submitData() async {
-    if (tagNoController.text.isEmpty ||
+  List tags = [];
+  String selectedTagNo = '';
+
+  @override
+  initState() {
+    super.initState();
+    getCowtags();
+  }
+
+  getCowtags() async {
+    tags = await _cowsController.getMilkedCowTags();
+    selectedTagNo = tags.isNotEmpty ? tags.first : null;
+  }
+
+  _submitData() async {
+    if (selectedTagNo == '' ||
         yieldController.text.isEmpty ||
         yieldOnCalfController.text.isEmpty) {
       Get.snackbar(
@@ -39,7 +53,7 @@ class _NewMilkRecordPageState extends State<NewMilkRecordPage> {
           "Please fill in all the fields before submitting");
     } else {
       var newRecord = {
-        "tagNo": tagNoController.text.trim(),
+        "tagNo": selectedTagNo,
         "yield": yieldController.text.trim(),
         "yieldOnCalf": yieldOnCalfController.text.trim(),
         "observations": observationsController.text.trim(),
@@ -55,7 +69,6 @@ class _NewMilkRecordPageState extends State<NewMilkRecordPage> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        tagNoNode.unfocus();
         yieldNode.unfocus();
         yieldOnCalfNode.unfocus();
         observationsNode.unfocus();
@@ -71,11 +84,49 @@ class _NewMilkRecordPageState extends State<NewMilkRecordPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 15),
-                customTextField(
-                  labelText: "Tag Number*",
-                  textEditingController: tagNoController,
-                  focusNode: tagNoNode,
-                ),
+                FutureBuilder(
+                    future: _cowsController.getMilkedCowTags(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return CircularProgressIndicator();
+                      } else if (snapshot.hasError) {
+                        return Text('Error: ${snapshot.error}');
+                      } else {
+                        List data = snapshot.data;
+                        // Now you can use selectedValue in your widget's build method
+                        return Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black),
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: Row(
+                            children: [
+                              Text("Tag Number: "),
+                              SizedBox(width: 10),
+                              Expanded(
+                                child: DropdownButton<String>(
+                                  value: selectedTagNo,
+                                  items: data
+                                      .map(
+                                        (val) => DropdownMenuItem(
+                                          child: Text(val),
+                                          value: val.toString(),
+                                        ),
+                                      )
+                                      .toList(),
+                                  onChanged: (newVal) {
+                                    setState(() {
+                                      selectedTagNo = newVal!;
+                                    });
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+                    }),
                 SizedBox(height: 16.0),
                 customTextField(
                   labelText: "Yield*",
@@ -122,5 +173,13 @@ class _NewMilkRecordPageState extends State<NewMilkRecordPage> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    yieldController.dispose();
+    yieldOnCalfController.dispose();
+    observationsController.dispose();
   }
 }
