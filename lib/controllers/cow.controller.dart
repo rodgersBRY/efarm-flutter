@@ -34,7 +34,7 @@ class CowsController extends GetxController {
 
     try {
       final resp =
-          await http.get(Uri.parse("http://10.0.2.2:3000/api/v1/cows/milked"));
+          await http.get(Uri.parse("http://efarm-api.vercel.app/api/v1/cows/milked"));
 
       if (resp.statusCode == 200) {
         final jsonData = json.decode(resp.body);
