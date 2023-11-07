@@ -1,4 +1,4 @@
-package com.dev.mawi
+package com.example.efarm
 
 import io.flutter.embedding.android.FlutterActivity
 

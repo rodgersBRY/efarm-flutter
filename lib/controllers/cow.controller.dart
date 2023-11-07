@@ -11,6 +11,7 @@ class CowsController extends GetxController {
   List<CowModel> _milkedCows = [];
   RxBool isLoading = false.obs;
 
+  List<CowModel> get milkedCows => _milkedCows;
   bool get loading => isLoading.value;
 
   Future<List<CowModel>> getCows() async {
@@ -115,8 +116,8 @@ class CowsController extends GetxController {
     isLoading.value = true;
 
     try {
-      final resp = await http
-          .delete(Uri.parse("https://efarm-api.vercel.app/api/v1/cows/delete/$cowTag"));
+      final resp = await http.delete(
+          Uri.parse("https://efarm-api.vercel.app/api/v1/cows/delete/$cowTag"));
 
       isLoading.value = false;
 

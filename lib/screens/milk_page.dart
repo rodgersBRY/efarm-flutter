@@ -50,54 +50,64 @@ class _MilkPageState extends State<MilkPage> {
                     } else {
                       List<CowModel> cows = snapshot.data!;
 
-                      return Expanded(
-                        child: ListView.builder(
-                          itemCount: cows.length,
-                          itemBuilder: (context, index) {
-                            return Card(
-                              color: Colors.white,
-                              elevation: 1, // Add elevation for a shadow effect
-                              margin: const EdgeInsets.all(8.0),
-                              child: ListTile(
-                                onTap: () {
-                                  Get.toNamed(
-                                    "/milk-record",
-                                    arguments: {
-                                      "appTitle": cows[index].name,
-                                      "tagNo": cows[index].tagNo,
-                                    },
-                                  );
-                                },
-                                title: Text(
-                                  '${cows[index].name}',
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                                subtitle: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Tag Number: ${cows[index].tagNo}'),
-                                  ],
-                                ),
-                                // You can also add more custom styling to ListTile here
+                      if (cows.length == 0) {
+                        return Expanded(
+                          child: Center(
+                            child: Text(
+                              "No cows being milked",
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey,
                               ),
-                            );
-                          },
-                        ),
-                      );
+                            ),
+                          ),
+                        );
+                      } else {
+                        return Expanded(
+                          child: ListView.builder(
+                            itemCount: cows.length,
+                            itemBuilder: (context, index) {
+                              return Card(
+                                color: Colors.white,
+                                elevation:
+                                    1, // Add elevation for a shadow effect
+                                margin: const EdgeInsets.all(8.0),
+                                child: ListTile(
+                                  onTap: () {
+                                    Get.toNamed(
+                                      "/milk-record",
+                                      arguments: {
+                                        "appTitle": cows[index].name,
+                                        "tagNo": cows[index].tagNo,
+                                      },
+                                    );
+                                  },
+                                  title: Text(
+                                    '${cows[index].name}',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                  subtitle: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text('Tag Number: ${cows[index].tagNo}'),
+                                    ],
+                                  ),
+                                  // You can also add more custom styling to ListTile here
+                                ),
+                              );
+                            },
+                          ),
+                        );
+                      }
                     }
                 }
               }),
         ],
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        label: Text("New Record"),
-        onPressed: () {
-          Get.toNamed("/new-milk-record");
-        },
-        icon: Icon(Icons.add),
-        backgroundColor: AppColors.primaryBlueColor.withOpacity(.9),
-        foregroundColor: Colors.white,
-      ),
+      
     );
   }
 }

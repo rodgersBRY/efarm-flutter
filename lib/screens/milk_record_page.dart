@@ -66,51 +66,78 @@ class _MilkRecordState extends State<MilkRecord> {
                         return customErrorWidget();
                       } else {
                         // reverse the list to show latest on top
-                        List<MilkingModel> records = snapshot.data!.reversed.toList();
-
-                        return Expanded(
-                          child: ListView.builder(
-                            itemCount: records.length,
-                            itemBuilder: (context, index) {
-                              return Card(
-                                elevation: 1,
-                                child: ExpansionTile(
-                                  title: Text(records[index].dateTime),
-                                  childrenPadding: const EdgeInsets.all(15),
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "Yield: ${records[index].yield}L",
-                                          style: TextStyle(fontSize: 16),
-                                        ),
-                                        Text(
-                                          "Yield on Calf: ${records[index].yieldOnCalf}L",
-                                          style: TextStyle(fontSize: 16),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(height: 10),
-                                    Text(
-                                      "Comments: ${records[index].observations}",
-                                      softWrap: true,
-                                      style: TextStyle(
-                                          color: const Color.fromARGB(
-                                              255, 94, 94, 94)),
-                                    ),
-                                  ],
+                        List<MilkingModel> records =
+                            snapshot.data!.reversed.toList();
+                        if (records.length == 0) {
+                          return Expanded(
+                            child: Center(
+                              child: Text(
+                                "$appTitle has not been milked",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey,
                                 ),
-                              );
-                            },
-                          ),
-                        );
+                              ),
+                            ),
+                          );
+                        } else {
+                          return Expanded(
+                            child: ListView.builder(
+                              itemCount: records.length,
+                              itemBuilder: (context, index) {
+                                return Card(
+                                  elevation: 1,
+                                  child: ExpansionTile(
+                                    title: Text(records[index].dateTime),
+                                    childrenPadding: const EdgeInsets.all(15),
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            "Yield: ${records[index].yield}L",
+                                            style: TextStyle(fontSize: 16),
+                                          ),
+                                          Text(
+                                            "Yield on Calf: ${records[index].yieldOnCalf}L",
+                                            style: TextStyle(fontSize: 16),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(height: 10),
+                                      Text(
+                                        "Comments: ${records[index].observations}",
+                                        softWrap: true,
+                                        style: TextStyle(
+                                            color: const Color.fromARGB(
+                                                255, 94, 94, 94)),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            ),
+                          );
+                        }
                       }
                   }
                 }),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        label: Text("New Record"),
+        onPressed: () {
+          Get.toNamed(
+            "/new-milk-record",
+            arguments: {"tagNo": tagNo, "cowName": appTitle},
+          );
+        },
+        icon: Icon(Icons.add),
+        backgroundColor: AppColors.primaryBlueColor.withOpacity(.9),
+        foregroundColor: Colors.white,
       ),
     );
   }
