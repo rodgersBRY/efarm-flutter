@@ -13,6 +13,7 @@ class MilkingController extends GetxController {
 
   Future addMilkRecord({required Map<String, dynamic> record}) async {
     isLoading.value = true;
+    
     try {
       final resp = await http.post(
         Uri.parse("https://efarm-api.vercel.app/api/v1/milking/new"),

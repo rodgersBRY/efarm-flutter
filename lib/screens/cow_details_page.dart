@@ -134,16 +134,21 @@ class _CowDetailsScreenState extends State<CowDetailsScreen> {
                                         },
                                         child: Text("Cancel"),
                                       ),
-                                      Obx(() =>TextButton(
-                                        style: ButtonStyle(
-                                          foregroundColor:
-                                              MaterialStateProperty.all<Color>(
-                                                  AppColors.primaryGreenColor),
-                                        ),
-                                        onPressed: () => deleteCow(cow.tagNo),
-                                        child:  Text("Delete"),
-                                      )),
-                                      
+                                      Obx(() => TextButton(
+                                            style: ButtonStyle(
+                                              foregroundColor:
+                                                  MaterialStateProperty
+                                                      .all<Color>(AppColors
+                                                          .primaryGreenColor),
+                                            ),
+                                            onPressed: () =>
+                                                deleteCow(cow.tagNo),
+                                            child: _cowsController.loading
+                                                ? CircularProgressIndicator(
+                                                    color: AppColors
+                                                        .accentGreenColor)
+                                                : Text("Delete"),
+                                          )),
                                     ],
                                   );
                                 });
