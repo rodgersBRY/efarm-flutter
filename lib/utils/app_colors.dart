@@ -7,4 +7,5 @@ class AppColors {
   static const Color primaryGreenColor = Color.fromRGBO(9, 140, 16, 1);
   static const Color accentGreenColor = Color.fromRGBO(124, 174, 113, 1);
   static const Color accentWhiteColor = Color.fromRGBO(242, 244, 243, 1);
+  static const Color errorColor = Color.fromRGBO(233, 9, 9, 1);
 }

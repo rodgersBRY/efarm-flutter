@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
 
   List<GetPage> _pages = [
     GetPage(
-        name: "/", page: () => const HomepageScreen(), binding: MyBindings()),
+        name: "/", page: () => const LoginPage(), binding: MyBindings()),
     GetPage(
         name: "/cows-page",
         page: () => const CowsPage(),
