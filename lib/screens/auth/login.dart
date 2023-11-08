@@ -192,24 +192,25 @@ class _LoginPageState extends State<LoginPage> {
               onTap: _login,
               child: Center(
                 child: Container(
-                  width: MediaQuery.of(context).size.width / 3,
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white),
-                    borderRadius: BorderRadius.all(Radius.circular(7)),
-                  ),
-                  child: Center(
-                    child: Text(
-                      "SUBMIT",
-                      style: TextStyle(
-                        letterSpacing: 2,
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w800,
-                      ),
+                    width: MediaQuery.of(context).size.width / 3,
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.white),
+                      borderRadius: BorderRadius.all(Radius.circular(7)),
                     ),
-                  ),
-                ),
+                    child: Obx(() => Center(
+                          child: _userController.isLoading
+                              ? CircularProgressIndicator(color: Colors.white70)
+                              : Text(
+                                  "SUBMIT",
+                                  style: TextStyle(
+                                    letterSpacing: 2,
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                                ),
+                        ))),
               ),
             )
           ],

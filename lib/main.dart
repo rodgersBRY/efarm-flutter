@@ -6,11 +6,19 @@ import 'package:get/get.dart';
 import './controllers/bindings.dart';
 import './screens/screens.dart';
 import './utils/app_colors.dart';
+import 'utils/check_authentication_utils.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  bool isAuthenticated = await checkAuthentication();
+
+  return runApp(MyApp(isAuthenticated: isAuthenticated));
+}
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+  final bool isAuthenticated;
+  MyApp({super.key, required this.isAuthenticated});
 
   @override
   Widget build(BuildContext context) {
@@ -22,14 +30,15 @@ class MyApp extends StatelessWidget {
             ColorScheme.fromSeed(seedColor: AppColors.primaryBlueColor),
         useMaterial3: true,
       ),
-      initialRoute: "/",
+      initialRoute: isAuthenticated ? "/" : "/login",
       getPages: _pages,
     );
   }
 
   List<GetPage> _pages = [
+    GetPage(name: "/", page: () => const HomepageScreen()),
     GetPage(
-        name: "/", page: () => const LoginPage(), binding: MyBindings()),
+        name: "/login", page: () => const LoginPage(), binding: MyBindings()),
     GetPage(
         name: "/cows-page",
         page: () => const CowsPage(),
