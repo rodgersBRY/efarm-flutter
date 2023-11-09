@@ -51,7 +51,7 @@ class MilkingController extends GetxController {
   Future<List<MilkingModel>> getCowMilkRecords({required int tagNo}) async {
     try {
       final resp = await http
-          .get(Uri.parse("http://efarm-api.vercel.app/api/v1/milking/$tagNo"));
+          .get(Uri.parse("https://efarm-api.vercel.app/api/v1/milking/$tagNo"));
 
       if (resp.statusCode == 200) {
         final jsonData = json.decode(resp.body);

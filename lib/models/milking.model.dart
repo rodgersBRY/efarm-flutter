@@ -1,13 +1,15 @@
 class MilkingModel {
   String dateTime;
-  CowInfo cowInfo;
+  String cowName;
+  int tagNo;
   int yield;
   int yieldOnCalf;
   String observations;
 
   MilkingModel({
     required this.dateTime,
-    required this.cowInfo,
+    required this.cowName,
+    required this.tagNo,
     required this.yield,
     required this.yieldOnCalf,
     required this.observations,
@@ -15,24 +17,10 @@ class MilkingModel {
 
   factory MilkingModel.fromJson(Map<String, dynamic> json) => MilkingModel(
         dateTime: json["dateTime"],
-        cowInfo: CowInfo.fromJson(json["cowInfo"]),
+        cowName: json['cowName'],
+        tagNo: json['tagNo'],
         yield: json["yield"],
         yieldOnCalf: json["yieldOnCalf"] ?? "",
         observations: json["observations"] ?? "",
-      );
-}
-
-class CowInfo {
-  String name;
-  int tagNo;
-
-  CowInfo({
-    required this.name,
-    required this.tagNo,
-  });
-
-  factory CowInfo.fromJson(Map<String, dynamic> json) => CowInfo(
-        name: json["name"],
-        tagNo: json["tagNo"],
       );
 }

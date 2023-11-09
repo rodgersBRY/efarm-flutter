@@ -2,6 +2,7 @@ import 'package:efarm/controllers/cow.controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/cow.model.dart';
 import '../utils/app_colors.dart';
@@ -16,6 +17,20 @@ class CowDetailsScreen extends StatefulWidget {
 
 class _CowDetailsScreenState extends State<CowDetailsScreen> {
   CowsController _cowsController = Get.find();
+  String? role;
+
+  @override
+  void initState() {
+    super.initState();
+    checkUserRole();
+  }
+
+  Future checkUserRole() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      role = prefs.getString("role");
+    });
+  }
 
   String formatDate(String date) {
     return DateFormat.yMMM().format(DateTime.parse(date));
@@ -114,47 +129,49 @@ class _CowDetailsScreenState extends State<CowDetailsScreen> {
                           style: TextStyle(fontSize: 25, color: Colors.white),
                         ),
                         Expanded(child: Container()),
-                        IconButton(
-                          onPressed: () {
-                            showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                    title: Text(
-                                        "Are you sure you want to delete?"),
-                                    actions: [
-                                      TextButton(
-                                        style: ButtonStyle(
-                                          foregroundColor:
-                                              MaterialStateProperty.all<Color>(
-                                                  Colors.grey),
-                                        ),
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Text("Cancel"),
-                                      ),
-                                      Obx(() => TextButton(
-                                            style: ButtonStyle(
-                                              foregroundColor:
-                                                  MaterialStateProperty
-                                                      .all<Color>(AppColors
-                                                          .primaryGreenColor),
+                        role == 'admin'
+                            ? IconButton(
+                                onPressed: () {
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return AlertDialog(
+                                          title: Text(
+                                              "Are you sure you want to delete?"),
+                                          actions: [
+                                            TextButton(
+                                              style: ButtonStyle(
+                                                foregroundColor:
+                                                    MaterialStateProperty.all<
+                                                        Color>(Colors.grey),
+                                              ),
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: Text("Cancel"),
                                             ),
-                                            onPressed: () =>
-                                                deleteCow(cow.tagNo),
-                                            child: _cowsController.loading
-                                                ? CircularProgressIndicator(
-                                                    color: AppColors
-                                                        .accentGreenColor)
-                                                : Text("Delete"),
-                                          )),
-                                    ],
-                                  );
-                                });
-                          },
-                          icon: Icon(Icons.delete, color: Colors.white),
-                        )
+                                            Obx(() => TextButton(
+                                                  style: ButtonStyle(
+                                                    foregroundColor:
+                                                        MaterialStateProperty
+                                                            .all<Color>(AppColors
+                                                                .primaryGreenColor),
+                                                  ),
+                                                  onPressed: () =>
+                                                      deleteCow(cow.tagNo),
+                                                  child: _cowsController.loading
+                                                      ? CircularProgressIndicator(
+                                                          color: AppColors
+                                                              .accentGreenColor)
+                                                      : Text("Delete"),
+                                                )),
+                                          ],
+                                        );
+                                      });
+                                },
+                                icon: Icon(Icons.delete, color: Colors.white),
+                              )
+                            : Container()
                       ],
                     ),
                   ),

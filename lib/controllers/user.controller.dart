@@ -23,7 +23,7 @@ class UserController extends GetxController {
 
     try {
       final http.Response resp = await http.post(
-        Uri.parse("http://10.0.2.2:3000/api/v1/auth/login"),
+        Uri.parse("https://efarm-api.vercel.app/api/v1/auth/login"),
         headers: {"Content-Type": "application/json"},
         body: json.encode(data),
       );
@@ -37,6 +37,7 @@ class UserController extends GetxController {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         prefs.setString("token", jsonData['token']);
         prefs.setString("username", jsonData['loadedUser']['username']);
+        prefs.setString("role", jsonData['loadedUser']['role']);
       }
 
       return resp.statusCode;

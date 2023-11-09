@@ -1,10 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../screens/screens.dart';
 import '../utils/app_colors.dart';
 
-class IconsGrid extends StatelessWidget {
+class IconsGrid extends StatefulWidget {
   IconsGrid({super.key});
+
+  @override
+  State<IconsGrid> createState() => _IconsGridState();
+}
+
+class _IconsGridState extends State<IconsGrid> {
+  String? role;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    checkUserRole();
+  }
+
+  Future checkUserRole() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      role = prefs.getString("role");
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +37,7 @@ class IconsGrid extends StatelessWidget {
           mainAxisSpacing: 0,
           crossAxisSpacing: 0,
         ),
-        itemCount: _homeActions.length,
+        itemCount: role != 'admin' ? _userActions.length : adminActions.length,
         itemBuilder: (context, index) {
           return Container(
             child: Column(
@@ -22,7 +45,10 @@ class IconsGrid extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => _homeActions[index]['route']));
+                      builder: (context) => role != 'admin'
+                          ? _userActions[index]['route']
+                          : adminActions[index]['route'],
+                    ));
                   },
                   child: Container(
                     width: 150,
@@ -31,7 +57,9 @@ class IconsGrid extends StatelessWidget {
                         border: Border.all(color: Colors.grey),
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                     child: Image.asset(
-                      _homeActions[index]["icon"],
+                      role != 'admin'
+                          ? _userActions[index]["icon"]
+                          : adminActions[index]["icon"],
                       fit: BoxFit.cover,
                       width: 80,
                     ),
@@ -39,7 +67,9 @@ class IconsGrid extends StatelessWidget {
                 ),
                 SizedBox(height: 5),
                 Text(
-                  _homeActions[index]["title"],
+                  role != 'admin'
+                      ? _userActions[index]["title"]
+                      : adminActions[index]["title"],
                   style: TextStyle(
                     color: AppColors.primaryBlueColor,
                   ),
@@ -78,7 +108,7 @@ class IconsGrid extends StatelessWidget {
     },
   ];
 
-  final List _homeActions = [
+  final List _userActions = [
     {
       "title": 'Cows',
       "icon": 'assets/cows.png',

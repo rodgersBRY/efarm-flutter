@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../utils/app_colors.dart';
@@ -28,6 +29,15 @@ class _HomepageScreenState extends State<HomepageScreen> {
     });
   }
 
+  Future<void> logoutUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove("token");
+    prefs.remove("role");
+    prefs.remove("username");
+
+    Get.offAllNamed("/login");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,6 +47,12 @@ class _HomepageScreenState extends State<HomepageScreen> {
         backgroundColor: AppColors.primaryGreenColor,
         foregroundColor: Colors.white,
         centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: logoutUser,
+            icon: Icon(Icons.logout),
+          )
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(10),
