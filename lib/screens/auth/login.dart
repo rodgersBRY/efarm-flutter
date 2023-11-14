@@ -1,7 +1,6 @@
 import 'package:efarm/controllers/user.controller.dart';
 import 'package:efarm/utils/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
