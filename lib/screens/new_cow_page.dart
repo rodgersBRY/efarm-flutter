@@ -92,15 +92,11 @@ class _NewCowPageState extends State<NewCowPage> {
     if (nameController.text.isEmpty ||
         tagNoController.text.isEmpty ||
         weightController.text.isEmpty) {
-      Get.snackbar(
-          backgroundColor: Colors.red,
-          colorText: Colors.white,
-          icon: Icon(
-            Icons.error,
-            color: Colors.white,
-          ),
-          "Error",
-          "Please fill in all the fields before submitting");
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Please fill in all the fields before submitting"),
+        ),
+      );
     } else {
       // convert DateTime to String
       final dateStr = DateFormat('yyy-MM-dd').format(selectedDate);
@@ -124,6 +120,13 @@ class _NewCowPageState extends State<NewCowPage> {
       };
 
       await _cowsController.addCow(cow: CowModel.fromJson(newCow));
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("The cow has been registered successfully"),
+          backgroundColor: AppColors.accentGreenColor,
+        ),
+      );
 
       Get.offNamed("/cows-page");
     }
@@ -163,15 +166,15 @@ class _NewCowPageState extends State<NewCowPage> {
                 customTextField(
                     focusNode: nameNode,
                     textEditingController: nameController,
-                    labelText: "Name"),
+                    labelText: "Name*"),
                 customTextField(
                     focusNode: tagNoNode,
                     textEditingController: tagNoController,
-                    labelText: "Tag No"),
+                    labelText: "Tag No*"),
                 customTextField(
                     focusNode: weightNode,
                     textEditingController: weightController,
-                    labelText: "Weight"),
+                    labelText: "Weight*"),
                 customDropdown(
                   context: context,
                   defaultValue: genderValue,

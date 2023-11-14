@@ -1,6 +1,7 @@
 import 'package:efarm/controllers/user.controller.dart';
 import 'package:efarm/utils/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
@@ -26,12 +27,10 @@ class _LoginPageState extends State<LoginPage> {
     String password = _passwordController.text;
 
     if (email.isEmpty || password.isEmpty) {
-      Get.snackbar(
-        "Warning",
-        "Your email or password cannot be empty",
-        icon: Icon(Icons.warning, color: Colors.white),
-        backgroundColor: AppColors.errorColor,
-        colorText: Colors.white,
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Your email or password cannot be empty"),
+        ),
       );
 
       return;
@@ -45,32 +44,21 @@ class _LoginPageState extends State<LoginPage> {
     if (statusCode == 200) {
       _emailController.clear();
       _passwordController.clear();
-      Get.snackbar(
-        "Success",
-        "Logged in successfully",
-        colorText: Colors.white,
-        backgroundColor: Colors.green,
-        icon: Icon(Icons.check_circle_outline, color: Colors.white),
-      );
 
       Get.offNamed('/');
     } // email not found
     else if (statusCode == 404) {
-      Get.snackbar(
-        "Error",
-        "No user with that email",
-        icon: Icon(Icons.warning, color: Colors.white),
-        backgroundColor: Colors.orange,
-        colorText: Colors.white,
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("User not registered!"),
+        ),
       );
     } // wrong password
     else if (statusCode == 401) {
-      Get.snackbar(
-        "Error",
-        "Password is incorrect",
-        colorText: Colors.white,
-        backgroundColor: Colors.orange,
-        icon: Icon(Icons.warning, color: Colors.white),
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Wrong password!"),
+        ),
       );
     }
   }

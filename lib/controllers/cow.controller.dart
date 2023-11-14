@@ -75,22 +75,12 @@ class CowsController extends GetxController {
 
       if (resp.statusCode == 201) {
         isLoading.value = false;
-        Get.snackbar(
-          backgroundColor: Colors.white,
-          icon: Icon(
-            Icons.check,
-            color: Colors.green,
-          ),
-          "Success",
-          "The cow information has been saved",
-        );
       } else {
         isLoading.value = false;
       }
     } catch (err) {
       isLoading.value = false;
       Get.snackbar("Error", "Error saving the details");
-      throw Exception(err);
     }
   }
 
