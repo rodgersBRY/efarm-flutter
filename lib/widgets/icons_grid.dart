@@ -16,7 +16,6 @@ class _IconsGridState extends State<IconsGrid> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     checkUserRole();

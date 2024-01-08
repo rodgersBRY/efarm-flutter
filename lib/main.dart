@@ -36,14 +36,19 @@ class MyApp extends StatelessWidget {
   }
 
   List<GetPage> _pages = [
-    GetPage(name: "/", page: () => const HomepageScreen(), binding: MyBindings()),
+    GetPage(
+        name: "/", page: () => const HomepageScreen(), binding: MyBindings()),
     GetPage(
         name: "/login", page: () => const LoginPage(), binding: MyBindings()),
     GetPage(
         name: "/cows-page",
         page: () => const CowsPage(),
         binding: MyBindings()),
-    GetPage(name: "/new-cow", page: () => NewCowPage(), binding: MyBindings()),
+    GetPage(
+      name: "/new-cow",
+      page: () => NewCowPage(),
+      binding: MyBindings(),
+    ),
     GetPage(
         name: "/cow-details",
         page: () => CowDetailsScreen(),
