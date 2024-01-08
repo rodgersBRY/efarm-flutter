@@ -54,12 +54,24 @@ class MyApp extends StatelessWidget {
         page: () => CowDetailsScreen(),
         binding: MyBindings()),
     GetPage(
-        name: "/milking-page", page: () => MilkPage(), binding: MyBindings()),
+      name: "/milking-page",
+      page: () => MilkPage(),
+      binding: MyBindings(),
+    ),
     GetPage(
-        name: "/milk-record", page: () => MilkRecord(), binding: MyBindings()),
+      name: "/milk-record",
+      page: () => MilkRecord(),
+      binding: MyBindings(),
+    ),
     GetPage(
-        name: "/new-milk-record",
-        page: () => NewMilkRecordPage(),
-        binding: MyBindings()),
+      name: "/new-milk-record",
+      page: () => NewMilkRecordPage(),
+      binding: MyBindings(),
+    ),
+    GetPage(
+      name: '/employees-page',
+      page: () => EmployeesPage(),
+      binding: MyBindings(),
+    ),
   ];
 }

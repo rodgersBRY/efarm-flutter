@@ -1,8 +1,9 @@
-import 'package:efarm/controllers/user.controller.dart';
+import './user.controller.dart';
 import 'package:get/get.dart';
 
 import './cow.controller.dart';
 import './milking.controller.dart';
+import './employee.controller.dart';
 
 class MyBindings extends Bindings {
   @override
@@ -10,5 +11,6 @@ class MyBindings extends Bindings {
     Get.lazyPut<CowsController>(() => CowsController());
     Get.lazyPut<MilkingController>(() => MilkingController());
     Get.lazyPut<UserController>(() => UserController());
+    Get.lazyPut<EmployeeController>(() => EmployeeController());
   }
 }
